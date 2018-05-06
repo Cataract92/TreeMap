@@ -1,3 +1,9 @@
+/**
+ * Nico Feld - 1169233
+ * Moritz Künzl - 1133858
+ * Markus Gierenz - 1171148
+ */
+
 import java.io.File;
 
 class SingleFile extends Entry
