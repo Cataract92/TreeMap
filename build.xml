@@ -1,0 +1,46 @@
+<?xml version = "1.0"?>
+
+<!-- Nico Feld - 1169233 -->
+
+<project name = "TreeMap" basedir = "." default = "build" >
+  <property name = "src.dir" value = "src"/>
+  <property name = "build.dir" value = "${basedir}/META-INF/classes"/>
+  <property name = "name" value = "TreeMap"/>
+
+  <path id = "master-classpath">
+    <pathelement path = "${build.dir}"/>
+  </path>
+
+
+  <target name = "build" description = "Compile source tree fst files" depends="clean">
+
+    <mkdir dir = "${build.dir}"/>
+
+    <javac destdir = "${build.dir}" source = "1.8" target = "1.8" includeantruntime="false" >
+      <src path = "${src.dir}"/>
+    </javac>
+
+  </target>
+
+  <target name="jar" depends="build">
+    <jar destfile="${basedir}/${ant.project.name}.jar" basedir="${build.dir}">
+      <manifest>
+        <attribute name="Main-Class" value="DirectoryTree"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name = "run" depends="jar">
+    <java jar="${basedir}/${ant.project.name}.jar" fork="true"/>
+  </target>
+
+  <target name = "clean" description = "Clean output directories">
+    <delete includeemptydirs="true">
+      <fileset dir = "${basedir}" defaultexcludes="false" includes="**/META-INF/"/>
+    </delete>
+    <delete>
+      <fileset dir = "${basedir}" includes="${ant.project.name}.jar"/>
+    </delete>
+
+  </target>
+</project>
